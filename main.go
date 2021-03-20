@@ -25,8 +25,16 @@ func requestHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(j)
 }
 
+func addContentType(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Add("Content-Type", "application/json")
+		next.ServeHTTP(w, r)
+	})
+}
+
 func main() {
 	router := mux.NewRouter()
+	router.Use(addContentType)
 	router.HandleFunc("/", requestHandler)
 
 	log.Fatal(http.ListenAndServe(":8000", router))

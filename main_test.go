@@ -24,5 +24,4 @@ func TestRequestHandler(t *testing.T) {
 			expected,
 		)
 	}
-
 }
