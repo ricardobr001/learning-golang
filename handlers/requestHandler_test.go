@@ -1,4 +1,4 @@
-package main
+package handlers
 
 import (
 	"net/http"
@@ -13,7 +13,7 @@ func TestRequestHandler(t *testing.T) {
 	}
 
 	RequestResponse := httptest.NewRecorder()
-	handler := http.HandlerFunc(requestHandler)
+	handler := http.HandlerFunc(RequestHandler)
 	handler.ServeHTTP(RequestResponse, request)
 
 	expected := `{"message":"Hello World"}`
